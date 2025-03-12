@@ -51,13 +51,6 @@ function wipe(){
     });
 }
 
-function clean(){
-    wipe();
-    document.querySelectorAll("input").forEach(input => {
-        input.value = null;
-    });
-}
-
 /*stopwatch*/
 let sec = 0, tens = 0, Interval;
 let tensLabel = document.getElementById("tenLabel");
@@ -86,4 +79,15 @@ function startTimer(){
         secLabel.value = sec;
     }
     //console.log(secLabel + " : " + tensLabel);
+}
+
+function clean(){
+    wipe();
+    document.querySelectorAll("input").forEach(input => {
+        input.value = null;
+    });
+    clearInterval(Interval);
+    tens = 0, sec = 0;
+    tensLabel.value = "00";
+    secLabel.value = "00";
 }
