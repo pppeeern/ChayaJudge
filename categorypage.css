@@ -1,0 +1,53 @@
+:root{
+    --ctgr-height: clamp(200px, 25vh, 250px);
+}
+
+a{
+    text-decoration: none;
+}
+
+.ctgr{
+    padding: 1.5% 3%;
+    margin-bottom: 4rem;
+    border: #eaeaeac0 1px solid;
+    border-radius: 0.5rem;
+    width: 80vw;
+    min-width: 10rem;
+    background-color: #ffffff;
+}
+
+.ctgr-name{
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.ctgr-container{
+    display: flex;
+    gap: 16px;
+    padding: 10px 0;
+}
+
+.ctgr-item{
+    border-radius: 14px;
+    height: var(--ctgr-height);
+    aspect-ratio: 3/2;
+}
+
+.ctgr-item-name{
+    padding: 2px 6px;
+    margin-bottom: 4px;
+    color: #1f1f1f;
+    font-weight: 500;
+    flex: 1;
+}
+
+.ctgr-item-thumb{
+    background-color: #eaeaea;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    margin: 6px 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
+}
