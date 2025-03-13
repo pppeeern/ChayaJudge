@@ -131,7 +131,7 @@ hr{
     margin-bottom: 4rem;
     border: #eaeaea 1px solid;
     border-radius: 0.5rem;
-    width: 60vw;
+    width: 50vw;
     min-width: 10rem;
     background-color: #ffffff;
 }
@@ -222,4 +222,8 @@ hr{
 .sheet-content-lists-value input:checked ~ .sheet-button{
     background-color: #5d83fa;
     color: #ffffff;
+}
+
+.input-outline-none:focus{
+    outline: none;
 }
