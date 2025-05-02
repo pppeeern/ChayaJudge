@@ -2,6 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root{
+    --light-gray: #999999;
+    --light-blue: #f8f9fd;
+    --heavy-blue: #5d83fa;
+    --dark-blue: #2B318A;
+
     --header-height: clamp(56px, 12vh, 70px);
 }
 
@@ -37,6 +42,11 @@ hr{
     text-align: center;
 }
 
+.bold{
+    color: var(--heavy-blue);
+    font-weight: 700;
+}
+
 #content{
     display: flex;
     flex-direction: column;
@@ -60,35 +70,10 @@ hr{
     align-items: center;
 }
 
-.comp-title{
-    color: #2B318A;
-    font-size: 2rem;
-    font-weight: 700;
-}
-
 .wrapper{
     padding-top: calc(var(--header-height) + 2vh);
     display: flex;
     flex-direction: row;
-}
-
-#sidebar{
-    top: 16vh;
-    position: sticky;
-    display: grid;
-    justify-content: start;
-    align-items: start;
-    gap: 40px;
-    margin-left: 3vw;
-    height: fit-content;
-    width: 10.8rem;
-    color: #999999;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-#sidebar button:hover{
-    background-color: #eaeaea;
 }
 
 .round-button{
@@ -124,72 +109,6 @@ hr{
     transition: 0.15s;
 }
 
-#sheet{
-    display: flex;
-    flex-direction: column;
-    padding: 1.5% 3%;
-    margin-bottom: 4rem;
-    border: #eaeaea 1px solid;
-    border-radius: 0.5rem;
-    width: 50vw;
-    min-width: 10rem;
-    background-color: #ffffff;
-}
-
-.sheet-content{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.sheet-content-header{
-    font-size: 1.35rem;
-    font-weight: 700;
-    margin-top: 1rem;
-    margin-bottom: 0.6rem;
-}
-
-.sheet-content-lists{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border: #eaeaea 1px solid;
-    border-radius: 0.5rem;
-    margin: 0.3rem 0;
-    padding: 1rem;
-}
-
-.sheet-content-lists-title{
-    font-size: 1.1rem;
-    width: 75%;
-}
-
-.sheet-input-hide{
-    position: absolute;
-    margin: 0;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-.sheet-button{
-    display: inline-block;
-    padding-block: 1px;
-    padding-inline: 6px;
-    background-color: #eff1fa;
-    color: #5d83fa;
-    font-size: 1.5rem;
-    border: 0;
-    cursor: pointer;
-    transition: linear 0.15s;
-}
-
-.sheet-button::placeholder{
-    color: #5d83fa;
-}
-
 .round-container{
     border-radius: 40px;
     background-color: #eff1fa;
@@ -213,17 +132,4 @@ hr{
     font-size: 1.5rem;
     height: 100%;
     aspect-ratio: 1;
-}
-
-.sheet-content-lists-value input:hover ~ .sheet-button{
-    background-color: #cbddff;
-}
-
-.sheet-content-lists-value input:checked ~ .sheet-button{
-    background-color: #5d83fa;
-    color: #ffffff;
-}
-
-.input-outline-none:focus{
-    outline: none;
 }
