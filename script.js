@@ -10,7 +10,7 @@ function update(){
 }
 
 function calculateScore() {
-    score = 0;
+    score = 0; //reset score everytime before calculate
 
     document.querySelectorAll(".sheet-input").forEach(input => {
         let value = parseInt(input.getAttribute("scoredata")) || 0;
@@ -36,6 +36,7 @@ function calculateScore() {
 }
 
 document.querySelectorAll(".sheet-input").forEach(input => {
+    //identify input
     let name = input.closest('.sheet-content-lists')?.querySelector('.sheet-content-lists-title').innerHTML;
     if(name) input.setAttribute("name", name);
     
@@ -57,7 +58,8 @@ function wipe(){
     });
 }
 
-/*stopwatch*/
+//stopwatch
+
 let sec = 0, tens = 0, Interval;
 let tensLabel = document.getElementById("tenLabel");
 let secLabel = document.getElementById("secLabel");
@@ -94,6 +96,8 @@ function clearTimer(){
     tensLabel.value = "00";
     secLabel.value = "00";
 }
+
+// 
 
 function clean(){
     wipe();

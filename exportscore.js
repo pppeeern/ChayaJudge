@@ -1,39 +1,50 @@
 const table = document.getElementById("comp-score-breakdown");
-table.deleteRow(1);
-const sheetBlocks = document.querySelectorAll("#sheet .sheet-content");
+const missionBlocks = document.querySelectorAll("#sheet .sheet-content");
+let filename;
 
-function addBreakRow(mission, max, count, score) {
+function addBreakRow(mission, max, score) {
     const row = document.createElement("tr");
+    row.className = "break";
     row.innerHTML = `
         <td>${mission}</td>
         <td>${max}</td>
-        <td>${count}</td>
         <td>${score}</td>
     `;
     table.appendChild(row);
 }
 
-sheetBlocks.forEach(block => {
-    const mission = block.querySelector(".sheet-content-header")?.innerText || "Unnamed";
-    const maxscore = block.querySelector(".sheet-content-lists-title").getAttribute("max");
+function breakdownTable(){
+    table.querySelectorAll("tr.break").forEach(row => row.remove());
+    
+    missionBlocks.forEach(block => {
+        const title = block.querySelector(".sheet-content-header")?.innerText || "Unnamed";
+        const maxscore = block.querySelector(".sheet-content-lists-title").getAttribute("max");
+        const scoring = block.querySelectorAll(".sheet-input");
+        let score = 0;
+        
+        scoring.forEach(input => {
+            if (input.checked) score = parseInt(input.getAttribute("scoredata")) || 0;
+        });
 
-    addBreakRow(mission, maxscore, 0, 0);
-});
-
+        addBreakRow(title, maxscore, score);
+    });
+}
 function genprepare(){
     const sheet_date = new Date();
 
     const detail = {
-        comptitle: document.getElementById("comp-title").innerHTML,
-        teamname: document.getElementById("team-name").value,
+        comptitle: document.getElementById("comp-title").innerHTML || "Competition",
+        teamname: document.getElementById("team-name").value || "Anonymous",
         // judge: document.getElementById("").value,
-        round: document.getElementById("round").value,
+        round: document.getElementById("round").value || 0,
         // date: document.getElementById("").value,
         // starttime: document.getElementById("").value,
         // endtime: document.getElementById("").value,
-        score: document.getElementById("score").innerHTML,
-        time: document.getElementById("secLabel").value + ":" + document.getElementById("tenLabel").value
+        score: document.getElementById("score").innerHTML || 0,
+        time: document.getElementById("secLabel").value + ":" + document.getElementById("tenLabel").value || "00:00"
     };
+    
+    filename = `${detail.comptitle}_${detail.round}_${detail.teamname}.pdf`;
 
     const report = document.getElementById("report");
 
@@ -44,12 +55,10 @@ function genprepare(){
     report.querySelector("#detail-comp-name").innerText = detail.comptitle;
     report.querySelector(".detail-team-name").innerText = detail.teamname;
     report.querySelector(".detail-round").innerText = detail.round;
-    report.querySelectorAll(".detail-comp-score").forEach(sc => {
-        sc.innerText = detail.score;
-    });
-    report.querySelectorAll(".detail-comp-time").forEach(tm => {
-        tm.innerText = detail.time;
-    });
+    report.querySelectorAll(".detail-comp-score").forEach(sc => {sc.innerText = detail.score;});
+    report.querySelectorAll(".detail-comp-time").forEach(tm => {tm.innerText = detail.time;});
+
+    breakdownTable();
 }
 
 async function genPDF(){
@@ -58,19 +67,24 @@ async function genPDF(){
     await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 100)));
 
     const gen = report;
-    await html2pdf().from(gen).save();
+
+    await html2pdf()
+    .from(gen)
+    .set({ filename: filename })
+    .save();
 
     report.setAttribute("hidden", "true");
 }
 
 async function genJPEG() {
     genprepare();
+    
 
     await htmlToImage
     .toJpeg(report, {quality: 0.95})
     .then((dataUrl) => {
         const gen = document.createElement('a');
-        gen.download = 'score-report.jpeg';
+        gen.download = `${filename}.jpeg`;
         gen.href = dataUrl;
         gen.click();
     })
@@ -116,7 +130,7 @@ async function genJPEGA4() {
 
     const jpegData = canvas.toDataURL("image/jpeg", 0.95);
     const link = document.createElement("a");
-    link.download = "score-report-a4.jpeg";
+    link.download = `${filename}.jpeg`;
     link.href = jpegData;
     link.click();
 
