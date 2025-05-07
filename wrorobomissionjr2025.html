@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>WRO Robomission JUNIOR 2025</title>
+        <title>Score Sheet - ChayaJudge</title>
 
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="scoresheet.css">
@@ -18,13 +18,13 @@
                 <a class="href-none" href="index.html">ChayaJudge</a>
             </div>
             <div class="wrapper">
-                
+                <div>
+                <div id="comp-title" class="comp-title">WRO 2025 JUNIOR</div>
                 <div id="sheet">
-                    <div id="comp-title" class="comp-title">WRO Robomission JUNIOR 2025</div>
                     <div class="sheet-content">
                         <div class="sheet-content-header">Collect the drone</div>
                         <div class="sheet-content-lists">
-                            <div class="sheet-content-lists-title">The drone in the start area.</div>
+                            <div class="sheet-content-lists-title" max="10" each="5">The drone in the start area.</div>
                             <div class="round-container">
                             <label class="sheet-content-lists-value">
                                 <input type="radio" class="sheet-input sheet-input-hide" scoredata="10">
@@ -44,7 +44,7 @@
                     <div class="sheet-content">
                         <div class="sheet-content-header">Help the stranded rover</div>
                         <div class="sheet-content-lists">
-                            <div class="sheet-content-lists-title">Unfolded solar panel and rover still touching the area.</div>
+                            <div class="sheet-content-lists-title" max="10" each="10">Unfolded solar panel and rover still touching the area.</div>
                             <label class="sheet-content-lists-value">
                                 <input type="checkbox" class="sheet-input sheet-input-hide" scoredata="10">
                                 <span class="sheet-button box"><i class="bi bi-check"></i></span>
@@ -54,31 +54,82 @@
                     <div class="sheet-content">
                         <div class="sheet-content-header">Support research on mars</div>
                         <div class="sheet-content-lists">
-                            <div class="sheet-content-lists-title">Research sample is completely in the corresponding coloured research lab.</div>
-                            <label class="sheet-content-lists-value">
-                                <input type="number" min="0" max="4" placeholder="0" class="sheet-button sheet-input rect" scoredata="15">
-                            </label>
+                            <div class="sheet-content-lists-title" max="60" each="15">Research sample is completely in the corresponding coloured research lab.</div>
+                            <div class="round-container">
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" checked="true" class="sheet-input sheet-input-hide" scoredata="0">
+                                    <span class="sheet-button rect">0</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="15">
+                                    <span class="sheet-button rect">1</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="30">
+                                    <span class="sheet-button rect">2</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="45">
+                                    <span class="sheet-button rect">3</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="60">
+                                    <span class="sheet-button rect">4</span>
+                                </label>
+                            </div>
                         </div>
                         <div class="sheet-content-lists">
-                            <div class="sheet-content-lists-title">Research sample is touching any lab or completely in the wrong-coloured lab.</div>
+                            <div class="sheet-content-lists-title" max="40" each="10">Research sample is touching any lab or completely in the wrong-coloured lab.</div>
                             <label class="sheet-content-lists-value">
-                                <input type="number" min="0" max="4" placeholder="0" class="sheet-button sheet-input rect" scoredata="10">
+                                <div class="round-container">
+                                    <label class="sheet-content-lists-value">
+                                        <input type="radio" checked="true" class="sheet-input sheet-input-hide" scoredata="0">
+                                        <span class="sheet-button rect">0</span>
+                                    </label>
+                                    <label class="sheet-content-lists-value">
+                                        <input type="radio" class="sheet-input sheet-input-hide" scoredata="10">
+                                        <span class="sheet-button rect">1</span>
+                                    </label>
+                                    <label class="sheet-content-lists-value">
+                                        <input type="radio" class="sheet-input sheet-input-hide" scoredata="20">
+                                        <span class="sheet-button rect">2</span>
+                                    </label>
+                                    <label class="sheet-content-lists-value">
+                                        <input type="radio" class="sheet-input sheet-input-hide" scoredata="30">
+                                        <span class="sheet-button rect">3</span>
+                                    </label>
+                                    <label class="sheet-content-lists-value">
+                                        <input type="radio" class="sheet-input sheet-input-hide" scoredata="40">
+                                        <span class="sheet-button rect">4</span>
+                                    </label>
+                                </div>
                             </label>
                         </div>
                     </div>
                     <div class="sheet-content">
                         <div class="sheet-content-header">Water supply</div>
                         <div class="sheet-content-lists">
-                            <div class="sheet-content-lists-title">Water tank is in box</div>
-                            <label class="sheet-content-lists-value">
-                                <input type="number" min="0" max="2" placeholder="0" class="sheet-button sheet-input rect" scoredata="20">
-                            </label>
+                            <div class="sheet-content-lists-title" max="40" each="20">Water tank is in box</div>
+                            <div class="round-container">
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" checked="true" class="sheet-input sheet-input-hide" scoredata="0">
+                                    <span class="sheet-button rect">0</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="20">
+                                    <span class="sheet-button rect">1</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="40">
+                                    <span class="sheet-button rect">2</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div class="sheet-content">
                         <div class="sheet-content-header">Cross rough terrain</div>
                         <div class="sheet-content-lists">
-                            <div class="sheet-content-lists-title">Robot is completely in target area</div>
+                            <div class="sheet-content-lists-title" max="12" each="12">Robot is completely in target area</div>
                             <label class="sheet-content-lists-value">
                                 <input type="checkbox" class="sheet-input sheet-input-hide" scoredata="12">
                                 <span class="sheet-button box"><i class="bi bi-check"></i></span>
@@ -88,25 +139,65 @@
                     <div class="sheet-content">
                         <div class="sheet-content-header">Bonus for barriers</div>
                         <div class="sheet-content-lists">
-                            <div class="sheet-content-lists-title">Barrier is not damaged or moved</div>
-                            <label class="sheet-content-lists-value">
-                                <input type="number" min="0" max="2" placeholder="0" class="sheet-button sheet-input rect" scoredata="8">
-                            </label>
+                            <div class="sheet-content-lists-title" max="16" each="8">Barrier is not damaged or moved</div>
+                            <div class="round-container">
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" checked="true" class="sheet-input sheet-input-hide" scoredata="0">
+                                    <span class="sheet-button rect">0</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="8">
+                                    <span class="sheet-button rect">1</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="16">
+                                    <span class="sheet-button rect">2</span>
+                                </label>
+                            </div>
                         </div>
+                    </div><div class="sheet-content">
+                        <div class="sheet-content-header">Bonus for rocks</div>
                         <div class="sheet-content-lists">
-                            <div class="sheet-content-lists-title">Rock is not damaged or moved</div>
-                            <label class="sheet-content-lists-value">
-                                <input type="number" min="0" max="6" placeholder="0" class="sheet-button sheet-input rect" scoredata="3">
-                            </label>
+                            <div class="sheet-content-lists-title" max="18" each="3">Rock is not damaged or moved</div>
+                            <div class="round-container">
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" checked="true" class="sheet-input sheet-input-hide" scoredata="0">
+                                    <span class="sheet-button rect">0</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="3">
+                                    <span class="sheet-button rect">1</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="6">
+                                    <span class="sheet-button rect">2</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="9">
+                                    <span class="sheet-button rect">3</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="12">
+                                    <span class="sheet-button rect">4</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="15">
+                                    <span class="sheet-button rect">5</span>
+                                </label>
+                                <label class="sheet-content-lists-value">
+                                    <input type="radio" class="sheet-input sheet-input-hide" scoredata="18">
+                                    <span class="sheet-button rect">6</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-
+                </div>
                 <div id="sidebar">
                     <div class="flex-col">
                         <div><p style="margin-bottom: 4px;">TEAM NAME : </p><input type="text" id="team-name" class="detail-input input-border-none"></div>
                         <div><p style="margin-bottom: 4px;">ROUND :  </p><input type="text" id="round" class="detail-input input-border-none"></div>
-                        <div style="margin-top: 6px;"><button title="Disqualify" class="grayblue-button" onclick="disq()">Disqualify</button></div>
+                        <div style="margin-top: 6px;"><button title="Disqualify" id="disq" class="grayblue-button warning-button" onclick="disq()">Disqualify</button></div>
                     </div>
                     <hr>
                     <div class="flex-col">
@@ -133,7 +224,7 @@
                     <hr>
                     <div class="flex-col center sidebar-add">
                         <div>
-                            <button title="Clear score sheet" onclick="clean()" class="round-button white-button" style="width: 100%; font-size: larger; margin: 10px 0;"><i class="bi bi-trash3"></i></button>
+                            <button title="Clear score sheet" onclick="clean()" class="round-button white-button warning-button" style="width: 100%; font-size: larger; margin: 10px 0;"><i class="bi bi-trash3"></i></button>
                         </div>
                         <div class="export">
                             <button title="Export score sheet" onclick="exp()" class="round-button white-button" style="width: 100%; font-size: larger; margin: 10px 0;"><i class="bi bi-box-arrow-up"></i></button>
@@ -151,15 +242,15 @@
         <div id="report" hidden>
             <div id="sheet-header" class="flex-row">
                 <div id="chayajudge">ChayaJudge</div>
-                <div class="flex-col sheet-header-info"><div>Date</div><div id="sheet-date" class="bold">xx x, xxxx</div></div>
+                <div class="flex-col sheet-header-info"><div>Date</div><div id="sheet-date" class="bold"></div></div>
                 <div class="verline"></div>
                 <div class="flex-col sheet-header-info"><div>Sheet #</div><div id="sheet-id" class="bold">x0</div></div>
             </div>
             <div id="comp-detail" class="label-grid">
                 <div id="detail-comp-name">Competition</div>
                 <div>Team Name:</div> <div class="detail detail-team-name"></div>
-                <div>Judge:</div> <div class="detail detail-judge"></div>
                 <div>Round:</div> <div class="detail detail-round"></div>
+                <div>Judge:</div> <div class="detail detail-judge"></div>
                 <div>Date:</div> <div class="detail detail-date"></div>
                 <div>Start Time:</div> <div class="detail detail-start-time"></div>
                 <div>End Time:</div> <div class="detail detail-end-time"></div>

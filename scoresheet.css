@@ -6,7 +6,7 @@
 }
 
 #sidebar{
-    top: 16vh;
+    top: 14vh;
     position: sticky;
     display: grid;
     justify-content: start;
@@ -62,7 +62,7 @@
 
 .sheet-content-lists-title{
     font-size: 1.1rem;
-    width: 75%;
+    width: 60%;
 }
 
 .sheet-input-hide{
@@ -80,7 +80,7 @@
     padding-inline: 6px;
     background-color: #eff1fa;
     color: #5d83fa;
-    font-size: 1rem;
+    font-size: 1.1rem;
     border: 0;
     cursor: pointer;
     transition: linear 0.15s;
@@ -135,10 +135,16 @@
     border: none;
     border-radius: 2px;
     font-size: 0.85rem;
+    color: var(--dark-gray);
     padding: 5px 0;
     padding-left: 20px;
 }
 
 .export-menu button:hover{
     background-color: #cbddff !important;
+}
+
+.warning-button:hover{
+    background-color: var(--warning-red) !important;
+    color: white;
 }

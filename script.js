@@ -1,7 +1,12 @@
+document.title = document.getElementById("comp-title").innerHTML + " | Score Sheet - ChayaJudge";
+
+const disqBtn = document.getElementById("disq");
+
 let score = 0, prev = 0;
+let isDis = false;
 
 function update(){
-    document.getElementById("score").innerHTML = score;
+    if(!isDis) document.getElementById("score").innerHTML = score;
 }
 
 function calculateScore() {
@@ -41,6 +46,7 @@ document.querySelectorAll(".sheet-input").forEach(input => {
 
 function wipe(){
     score = 0; prevscore = 0;
+    if(isDis) disq();
     update();
     document.querySelectorAll(".sheet-input").forEach(input => {
         if(input.value || input.checked){
@@ -55,6 +61,7 @@ function wipe(){
 let sec = 0, tens = 0, Interval;
 let tensLabel = document.getElementById("tenLabel");
 let secLabel = document.getElementById("secLabel");
+
 
 function startInter(){
     clearInterval(Interval);
@@ -81,19 +88,42 @@ function startTimer(){
     //console.log(secLabel + " : " + tensLabel);
 }
 
-function clean(){
-    wipe();
-    document.querySelectorAll("input").forEach(input => {
-        input.value = null;
-    });
+function clearTimer(){
     clearInterval(Interval);
     tens = 0, sec = 0;
     tensLabel.value = "00";
     secLabel.value = "00";
 }
 
+function clean(){
+    wipe();
+    document.querySelectorAll("input").forEach(input => {
+        input.value = null;
+    });
+    clearTimer();
+}
+
 function disq(){
-    document.getElementById("score").innerHTML = "DIS";
+    if(!isDis){
+        isDis = true;
+
+        disqBtn.style.backgroundColor = "#E44B37";
+        disqBtn.style.color = "white";
+
+        document.getElementById("score").innerHTML = "DIS";
+        document.getElementById("secLabel").value = "120";
+        document.getElementById("tenLabel").value = "00";
+    } else{
+        isDis = false;
+
+        disqBtn.style.backgroundColor = "#eff1fa";
+        disqBtn.style.color = "#999999";
+
+        update();
+        // clearTimer();
+        tensLabel.value = tens;
+        if(sec < 9) secLabel.value = "0" + sec;
+    }
 }
 
 function exp(){

@@ -15,11 +15,14 @@ function addBreakRow(mission, max, count, score) {
 
 sheetBlocks.forEach(block => {
     const mission = block.querySelector(".sheet-content-header")?.innerText || "Unnamed";
+    const maxscore = block.querySelector(".sheet-content-lists-title").getAttribute("max");
 
-    addBreakRow(mission, 0, 0, 0);
+    addBreakRow(mission, maxscore, 0, 0);
 });
 
 function genprepare(){
+    const sheet_date = new Date();
+
     const detail = {
         comptitle: document.getElementById("comp-title").innerHTML,
         teamname: document.getElementById("team-name").value,
@@ -36,6 +39,8 @@ function genprepare(){
 
     report.removeAttribute("hidden");
 
+    report.querySelector("#sheet-date").innerText = sheet_date.getDate() + "/" + (sheet_date.getMonth() + 1) + "/" + sheet_date.getFullYear();
+
     report.querySelector("#detail-comp-name").innerText = detail.comptitle;
     report.querySelector(".detail-team-name").innerText = detail.teamname;
     report.querySelector(".detail-round").innerText = detail.round;
@@ -50,14 +55,18 @@ function genprepare(){
 async function genPDF(){
     genprepare();
 
+    await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 100)));
+
     const gen = report;
-    html2pdf().from(gen).save();
+    await html2pdf().from(gen).save();
+
+    report.setAttribute("hidden", "true");
 }
 
 async function genJPEG() {
     genprepare();
 
-    htmlToImage
+    await htmlToImage
     .toJpeg(report, {quality: 0.95})
     .then((dataUrl) => {
         const gen = document.createElement('a');
@@ -65,6 +74,8 @@ async function genJPEG() {
         gen.href = dataUrl;
         gen.click();
     })
+
+    report.setAttribute("hidden", "true");
 }
 
 async function genJPEGA4() {
@@ -108,4 +119,6 @@ async function genJPEGA4() {
     link.download = "score-report-a4.jpeg";
     link.href = jpegData;
     link.click();
+
+    report.setAttribute("hidden", "true");
 }

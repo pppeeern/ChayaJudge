@@ -3,9 +3,11 @@
 
 :root{
     --light-gray: #999999;
+    --dark-gray: #666666;
     --light-blue: #f8f9fd;
     --heavy-blue: #5d83fa;
     --dark-blue: #2B318A;
+    --warning-red: #E44B37;
 
     --header-height: clamp(56px, 12vh, 70px);
 }
