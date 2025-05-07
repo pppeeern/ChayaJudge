@@ -3,37 +3,32 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Scoresheet</title>
+        <title>WRO Robomission JUNIOR 2025</title>
 
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="reporttemplate.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
     </head>
-    <body style="background-color: white;">
-        <div id="report">
+    <body>
+        <div id="content">
             <div id="sheet-header" class="flex-row">
-                <div id="chayajudge">ChayaJudge</div>
+                <div id="chayajudge" onclick="gen()">ChayaJudge</div>
                 <div class="flex-col sheet-header-info"><div>Date</div><div id="sheet-date" class="bold">xx x, xxxx</div></div>
                 <div class="verline"></div>
                 <div class="flex-col sheet-header-info"><div>Sheet #</div><div id="sheet-id" class="bold">x0</div></div>
             </div>
             <div id="comp-detail" class="label-grid">
                 <div id="detail-comp-name">Competition</div>
-                <div holder="Team Name">Team Name:</div>
-                <div class="detail" id="detail-team-name"></div>
-                <div holder="Judge">Judge:</div>
-                <div class="detail" id="detail-judge"></div>
-                <div holder="Round">Round:</div>
-                <div class="detail" id="detail-round"></div>
-                <div holder="Date">Date:</div>
-                <div class="detail" id="detail-date"></div>
-                <div holder="Start Time">Start Time:</div>
-                <div class="detail" id="detail-start-time"></div>
-                <div holder="End Time">End Time:</div>
-                <div class="detail" id="detail-end-time"></div>
-                <div holder="Score">Score:</div>
-                <div id="detail-comp-score"></div>
-                <div holder="Time">Time:</div>
-                <div class="detail" id="detail-comp-time"></div>
+                <div class="detail" id="detail-team-name" holder="Team Name"></div>
+                <div class="detail" id="detail-judge" holder="Judge"></div>
+                <div class="detail" id="detail-round" holder="Round"></div>
+                <div class="detail" id="detail-date" holder="Date"></div>
+                <div class="detail" id="detail-start-time" holder="Start Time"></div>
+                <div class="detail" id="detail-end-time" holder="End Time"></div>
+                <div class="detail" id="detail-comp-score" holder="Score"></div>
+                <div class="detail" id="detail-comp-time" holder="Time"></div>
             </div>
             <div class="flex-col center" style="padding: 2rem 0;">
                 <table id="comp-score-breakdown">
@@ -55,16 +50,28 @@
                         <tr>
                             <th>Total Score</th>
                             <th id="detail-comp-score">140</td>
-                            <td id="max-score"> / 166</td>
+                            <td id="max-score"> /<span style="padding-left: 4px;">166</span></td>
                         </tr>
                         <tr>
                             <th>Total Time (sec)</th>
                             <th id="detail-comp-time">69.51</td>
-                            <td id="max-time"> / 120.00</td>
+                            <td id="max-time"> /<span style="padding-left: 4px;">120.00</span></td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
+
+        <script src="script.js"></script>
+        <script>
+            document.querySelectorAll("div.detail").forEach((label) => {
+                label.innerHTML = label.getAttribute("holder") + ": ";
+            });
+
+            function gen(){
+                const pdf = document.getElementById("content");
+                html2pdf().from(pdf).save();
+            }
+        </script>
     </body>
 </html>

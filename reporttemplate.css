@@ -1,20 +1,14 @@
-body{
-    background: none;
-}
-
-#content{
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin: 2vw;
+#report{
     padding: 1rem 0;
+    background: white;
 }
 
-#content > div{
+#report > div{
     width: 100%;
 }
 
 #sheet-header{
-    padding: 1vw 2.5vw;
+    padding: 1vw 3vw;
     align-items: center;
     justify-content: space-between;
     height: 80px;
@@ -40,15 +34,20 @@ body{
 
 .label-grid{
     display: grid;
-    grid-column-gap: 200px;
+    grid-column-gap: 10px;
     grid-row-gap: 5px;
+}
+
+.detail{
+    color: black;
+    font-weight: 400;
 }
 
 #comp-detail{
     background-color: var(--light-blue);
     color: #565656;
     padding: 1rem 2.5rem;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
 }
 
@@ -56,13 +55,12 @@ body{
     color: var(--dark-blue);
     font-weight: 700;
     font-size: 1.5em;
-    grid-area: 1 / 1 / span 2 / span 2;
+    grid-area: 1 / 1 / span 2 / span 4;
 }
 
-#comp-detail #detail-comp-score,
-#comp-detail #detail-comp-time{
-    color: black;
-    padding-top: 0.8rem;
+#comp-detail .detail-comp-score,
+#comp-detail .detail-comp-time{
+    color: var(--dark-blue);
     font-size: 1.2em;
     font-weight: 600;
 }
@@ -100,17 +98,17 @@ body{
 
 #comp-score-breakdown th:first-child,
 #comp-score-breakdown td:first-child{
-    width: 60%;
+    width: 50%;
     text-align: left;
 }
 
 #comp-score-breakdown th:not(first-child),
 #comp-score-breakdown td:not(first-child){
-    width: calc(40% / 3);
+    width: calc(50% / 3);
 }
 
 #comp-score-summary{
-    width: 40%;
+    width: 50%;
     background-color: var(--dark-blue);
     color: #fff;
     justify-self: flex-end;

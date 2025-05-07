@@ -91,3 +91,18 @@ function clean(){
     tensLabel.value = "00";
     secLabel.value = "00";
 }
+
+function disq(){
+    document.getElementById("score").innerHTML = "DIS";
+}
+
+function exp(){
+    event.stopPropagation();
+    const menu = document.querySelector(".export-menu");
+    menu.style.display = (menu.style.display === "block") ? "" : "block";
+}
+
+window.onclick = event => {
+    const menu = document.querySelector(".export-menu");
+    menu.style.display = "";
+};

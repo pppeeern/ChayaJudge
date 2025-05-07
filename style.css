@@ -59,19 +59,20 @@ hr{
     top: 0;
     width: 100%;
     height: var(--header-height);
-    padding: 2rem 1rem;
+    padding: 2rem 4rem;
     margin: auto;
     color: #1F1F1F;
-    background-color: #ffffff;
-    font-size: 0.9rem;
+    /* background-color: #ffffff; */
+    font-size: 1.4rem;
+    font-weight: 700;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
 }
 
 .wrapper{
-    padding-top: calc(var(--header-height) + 2vh);
+    padding-top: calc(var(--header-height));
     display: flex;
     flex-direction: row;
 }
@@ -132,4 +133,10 @@ hr{
     font-size: 1.5rem;
     height: 100%;
     aspect-ratio: 1;
+}
+
+.href-none{
+    color: var(--dark-blue);
+    text-decoration: none;
+    
 }

@@ -2,6 +2,7 @@
     color: #2B318A;
     font-size: 2rem;
     font-weight: 700;
+    margin-bottom: 10px;
 }
 
 #sidebar{
@@ -79,7 +80,7 @@
     padding-inline: 6px;
     background-color: #eff1fa;
     color: #5d83fa;
-    font-size: 1.5rem;
+    font-size: 1rem;
     border: 0;
     cursor: pointer;
     transition: linear 0.15s;
@@ -97,6 +98,47 @@
     color: #ffffff;
 }
 
-.input-outline-none:focus{
+.detail-input{
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    height: 30px;
+    font-size: 1rem;
+    padding-left: 10px;
+    color: #5d83fa;
+    margin-bottom: 4px;
+}
+
+.input-border-none:focus{
     outline: none;
+    background-color: #eff1fa;
+}
+
+.export:hover .export-menu{
+    display: block;
+    transition: ease-in-out .15s;
+}
+
+.export-menu{
+    display: none;
+    z-index: 1;
+    position: absolute;
+    background-color: #eff1fa;
+    border-radius: 10px;
+    width: 175px;
+    padding: 6px 0;
+}
+
+.export-menu button{
+    text-align: left;
+    width: 100%;
+    background: none;
+    border: none;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    padding: 5px 0;
+    padding-left: 20px;
+}
+
+.export-menu button:hover{
+    background-color: #cbddff !important;
 }
