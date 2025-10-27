@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+:root {
+  --color-black: #1d1d1d;
+  --color-blue-550: lab(54.1736% 13.3368 -78.839);
+}
