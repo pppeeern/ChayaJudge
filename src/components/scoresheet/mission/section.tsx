@@ -1,4 +1,5 @@
 import Option from "./option";
+import { MissionType } from "@/app/scoresheet/[name]/page";
 
 export default function Section({
   id,
@@ -7,13 +8,7 @@ export default function Section({
 }: {
   id: number;
   name: string;
-  missions: {
-    id: number;
-    name: string;
-    type: string;
-    max_score: number;
-    options?: any[];
-  }[];
+  missions: MissionType[];
 }) {
   return (
     <div

@@ -6,7 +6,7 @@ export default function SectionHeader({
   activeCondition,
 }: {
   title: string;
-  resetFunction: any;
+  resetFunction: () => void;
   activeCondition: boolean;
 }) {
   return (

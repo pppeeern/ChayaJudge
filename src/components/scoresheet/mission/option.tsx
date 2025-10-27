@@ -1,4 +1,5 @@
 "use client";
+import { OptionType } from "@/app/scoresheet/[name]/page";
 import { useResult } from "@/app/scoresheet/[name]/resultProvider";
 
 import { Check } from "@deemlol/next-icons";
@@ -14,7 +15,7 @@ export default function Option({
   missionId: number;
   type: string;
   mscore: number;
-  options?: { label: string; value: number }[];
+  options?: OptionType[];
 }) {
   const { setMissionScore, score, sectionRemains } = useResult();
   const currentValue = score[missionId];
@@ -34,7 +35,7 @@ export default function Option({
     return (
       <div className="justify-self-end w-fit h-fit flex items-center rounded-md overflow-hidden border border-gray-300">
         {options?.map((opt, index) => (
-          <OptionButton key={index} label={opt.label} value={opt.value} />
+          <OptionButton key={index} label={opt.label} value={opt.value ?? 0} />
         ))}
       </div>
     );
@@ -78,8 +79,8 @@ export default function Option({
     square,
     dis,
   }: {
-    label: any;
-    value: number;
+    label: string | number | React.ReactElement;
+    value: string | number;
     square?: boolean;
     dis?: boolean;
   }) {

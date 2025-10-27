@@ -1,23 +1,25 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { MissionType } from "@/app/scoresheet/[name]/page";
 
-type scoreVal = number | string | null;
-type scoreType = Record<number, scoreVal>;
-type sectionType = Record<number, boolean>;
+type ScoreVal = number | string | null;
+type ScoreMap = Record<number, ScoreVal>;
+type SectionCompleteMap = Record<number, boolean>;
+type SectionRemainMap = Record<number, number>;
 
-type resultContextType = {
+type ResultContextType = {
   // SCORE
-  score: scoreType;
-  sectionComplete: sectionType;
-  sectionRemains: Record<number, number>;
+  score: ScoreMap;
+  sectionComplete: SectionCompleteMap;
+  sectionRemains: SectionRemainMap;
   setMissionScore: (
     sectionId: number,
     missionId: number,
-    value: scoreVal
+    value: ScoreVal
   ) => void;
-  getTotalScore: () => scoreVal;
+  getTotalScore: () => ScoreVal;
   resetScore: () => void;
-  getSectionRemain: (sectionId: number) => any;
+  getSectionRemain: (sectionId: number) => Record<number, number>;
 
   // TIMER
   secs: number;
@@ -28,58 +30,53 @@ type resultContextType = {
   setTimerReset: () => void;
 
   // TEAM
-  selectedTeam: string | undefined;
-  selectTeam: (name: string) => any;
+  selectedTeam?: string;
+  selectTeam: (name: string) => void;
 
   // ROUND
-  round: string | undefined;
-  setRoundSelect: (name: string) => any;
+  round?: string;
+  setRoundSelect: (name: string) => void;
 };
 
-const ResultContext = createContext<resultContextType | undefined>(undefined);
+type ResultProviderProps = {
+  children: React.ReactNode;
+  sectionMap: Record<number, number[]>;
+  missionMap: Record<number, MissionType>;
+};
+
+const ResultContext = createContext<ResultContextType | undefined>(undefined);
 
 export function ResultProvider({
   children,
   sectionMap,
   missionMap,
-}: {
-  children: React.ReactNode;
-  sectionMap: Record<number, number[]>;
-  missionMap: Record<number, any>;
-}) {
-  // SCORE PROVIDER
-  const [score, setScore] = useState<scoreType>({});
-  const [sectionComplete, setSectionComplete] = useState<sectionType>({});
-  const [sectionRemains, setSectionRemains] = useState<Record<number, number>>(
+}: ResultProviderProps) {
+  // SCORE
+  const [score, setScore] = useState<ScoreMap>({});
+  const [sectionComplete, setSectionComplete] = useState<SectionCompleteMap>(
     {}
   );
+  const [sectionRemains, setSectionRemains] = useState<SectionRemainMap>({});
 
-  React.useEffect(() => {
-    const initialRemains: Record<number, number> = {};
-
+  useEffect(() => {
+    const initialRemains: SectionRemainMap = {};
     Object.entries(sectionMap).forEach(([sectionId, missions]) => {
       if (!missions.length) return;
       const firstMission = missionMap[missions[0]];
       if (!firstMission) return;
-
       const max = Number(firstMission.type) || 0;
       initialRemains[Number(sectionId)] = max;
     });
-
     setSectionRemains(initialRemains);
   }, [sectionMap, missionMap]);
 
-  function checkSectionComplete(
-    sectionId: number,
-    scores: Record<number, any>
-  ) {
+  const checkSectionComplete = (sectionId: number, scores: ScoreMap) => {
     const missions = sectionMap[sectionId] || [];
-    if (missions.length == 0) return false;
-
+    if (!missions.length) return false;
     return missions.every((mId) => scores[mId] != null);
-  }
+  };
 
-  function calSectionRemains(sectionId: number, scores: scoreType) {
+  const calSectionRemains = (sectionId: number, scores: ScoreMap) => {
     const missions = sectionMap[sectionId] || [];
     if (!missions.length) return 0;
 
@@ -89,99 +86,79 @@ export function ResultProvider({
     for (const mId of missions) {
       const mission = missionMap[mId];
       if (!mission) continue;
-
       MAX = Number(mission.type) || 0;
       const value = scores[mId];
-
       if (typeof value === "number") {
         const unit = mission.max_score / (MAX || 1);
         USED += value / unit;
       }
     }
-
-    const remain = MAX - USED;
-    return Math.max(remain, 0);
-  }
+    return Math.max(MAX - USED, 0);
+  };
 
   const setMissionScore = (
     sectionId: number,
     missionId: number,
-    value: scoreVal
+    value: ScoreVal
   ) => {
     setScore((prev) => {
       const updated = {
         ...prev,
         [missionId]: value === prev[missionId] ? null : value,
       };
-
-      const completed = checkSectionComplete(sectionId, updated);
       setSectionComplete((prev) => ({
         ...prev,
-        [sectionId]: completed,
+        [sectionId]: checkSectionComplete(sectionId, updated),
       }));
-
-      const remain = calSectionRemains(sectionId, updated);
       setSectionRemains((prev) => ({
         ...prev,
-        [sectionId]: remain,
+        [sectionId]: calSectionRemains(sectionId, updated),
       }));
-
       return updated;
     });
   };
 
   const getTotalScore = () => {
     const values = Object.values(score);
-
-    const stringScore = values.find((value) => typeof value == "string");
+    const stringScore = values.find((v) => typeof v === "string");
     if (stringScore) return stringScore;
-
-    return values.reduce<number>((total, value) => {
-      if (typeof value === "number") return total + value;
-      return total;
-    }, 0);
+    return values.reduce<number>(
+      (total, v) => (typeof v === "number" ? total + v : total),
+      0
+    );
   };
 
   const resetScore = () => {
-    setScore({}), setSectionComplete({}), setSectionRemains({});
+    setScore({});
+    setSectionComplete({});
+    setSectionRemains({});
   };
 
   const getSectionRemain = (sectionId: number) => {
     const missions = sectionMap[sectionId] || [];
     const remain: Record<number, number> = {};
 
-    let _max = 0,
-      _used = 0,
-      _left = 0;
-
     missions.forEach((mId) => {
       const mission = missionMap[mId];
       if (!mission) return;
-
-      const max = Number(mission.type);
+      const max = Number(mission.type) || 0;
       const value = score[mId];
       const count =
         typeof value === "number"
           ? value / (mission.max_score / (max || 1))
           : 0;
-
-      _max = max;
-      _used += count;
-      _left = _max - _used;
-      if (!score[mId]) remain[mId] = _left;
+      const left = max - count;
+      if (!score[mId]) remain[mId] = left;
     });
 
     return remain;
   };
 
-  // TIMER PROVIDER
+  // TIMER
   const [isRunning, setIsRunning] = useState(false);
-  const [time, setTime] = useState<number>(0);
+  const [time, setTime] = useState(0);
 
-  const setTimerStart = () => {
-    setIsRunning((prev) => !prev);
-  };
-
+  const setTimerStart = () => setIsRunning((prev) => !prev);
   const setTimerReset = () => {
     setIsRunning(false);
     setTime(0);
@@ -197,21 +174,15 @@ export function ResultProvider({
   const tens = Math.floor((time / 10) % 100);
   const actualTime = time / 1000;
 
-  // TEAM PROVIDER
+  // TEAM
   const [selectedTeam, setSelectedTeam] = useState<string>();
+  const selectTeam = (name: string) =>
+    setSelectedTeam((prev) => (prev === name ? undefined : name));
 
-  const selectTeam = (name: string) => {
-    if (selectedTeam == name) setSelectedTeam(undefined);
-    else setSelectedTeam(name);
-  };
-
-  // ROUND PROVIDER
+  // ROUND
   const [round, setRound] = useState<string>();
-
-  const setRoundSelect = (name: string) => {
-    if (round == name) setRound(undefined);
-    else setRound(name);
-  };
+  const setRoundSelect = (name: string) =>
+    setRound((prev) => (prev === name ? undefined : name));
 
   return (
     <ResultContext.Provider
@@ -241,7 +212,8 @@ export function ResultProvider({
 }
 
 export function useResult() {
-  const cont = useContext(ResultContext);
-  if (!cont) throw new Error();
-  return cont;
+  const context = useContext(ResultContext);
+  if (!context)
+    throw new Error("useResult must be used within a ResultProvider");
+  return context;
 }

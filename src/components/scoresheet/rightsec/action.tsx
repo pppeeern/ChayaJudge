@@ -50,12 +50,12 @@ export default function ActionSection({
   interface exportItem {
     name: string;
     icon: React.ComponentType<{ size?: number; color?: string }>;
-    action: any;
+    action?: () => void;
   }
   const exportAction: exportItem[] = [
-    { name: "Export as PNG", icon: Image, action: "" },
-    { name: "Export as JPG", icon: Image, action: "" },
-    { name: "Export as PDF", icon: File, action: "" },
+    { name: "Export as PNG", icon: Image },
+    { name: "Export as JPG", icon: Image },
+    { name: "Export as PDF", icon: File },
   ];
 
   return (

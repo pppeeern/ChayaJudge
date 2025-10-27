@@ -12,24 +12,25 @@ import {
 import { Dropdown } from "../Dropdown";
 import { Divider } from "../Divider";
 import { useResult } from "@/app/scoresheet/[name]/resultProvider";
+import { RoundType } from "@/app/scoresheet/[name]/page";
 
 export default function Header({
   title,
   rounds,
 }: {
   title: string;
-  rounds: any;
+  rounds: RoundType[];
 }) {
   interface menuItem {
     name: string;
     icon: React.ComponentType<{ size?: number; color?: string }>;
-    action: any;
+    action?: () => void;
   }
 
   const competitionMenuItems: menuItem[] = [
-    { name: "Rename", icon: Edit3, action: "" },
-    { name: "Edit", icon: Edit, action: "" },
-    { name: "Delete", icon: Trash, action: "" },
+    { name: "Rename", icon: Edit3 },
+    { name: "Edit", icon: Edit },
+    { name: "Delete", icon: Trash },
   ];
 
   const { round, setRoundSelect } = useResult();
@@ -114,11 +115,7 @@ export default function Header({
                 <div className="flex flex-col w-44">
                   <div className="flex flex-col max-h-40 p-1 overflow-y-auto">
                     {rounds &&
-                      rounds.map((rnd: any) => {
-                        const { id, name } = {
-                          id: rnd.id,
-                          name: rnd.name,
-                        };
+                      rounds.map(({ id, name }) => {
                         const isSelected = round == name;
                         return (
                           <p

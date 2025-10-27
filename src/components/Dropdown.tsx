@@ -1,7 +1,19 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
-export function Dropdown({ className, fullWidth, inner, children }: any) {
+type DropdownType = {
+  className?: string;
+  fullWidth?: boolean;
+  inner?: React.ReactNode;
+  children: React.ReactNode;
+};
+
+export function Dropdown({
+  className,
+  fullWidth,
+  inner,
+  children,
+}: DropdownType) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 

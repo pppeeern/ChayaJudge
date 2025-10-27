@@ -9,8 +9,9 @@ import {
 } from "@deemlol/next-icons";
 import { Divider } from "../Divider";
 import { Dropdown } from "../Dropdown";
+import { CompetitionType } from "@/app/scoresheet/[name]/page";
 
-export default function Card({ data }: { data: any }) {
+export default function Card({ data }: { data: CompetitionType }) {
   const slug = encodeURIComponent(
     String(data?.name).trim().replace(/\s/g, "-").toLocaleLowerCase()
   );
@@ -18,13 +19,13 @@ export default function Card({ data }: { data: any }) {
   interface menuItem {
     name: string;
     icon: React.ComponentType<{ size?: number; color?: string }>;
-    action: any;
+    action?: () => void;
   }
 
   const cardMenuItems: menuItem[] = [
-    { name: "Rename", icon: Edit, action: "" },
-    { name: "Edit", icon: Edit, action: "" },
-    { name: "Delete", icon: Trash, action: "" },
+    { name: "Rename", icon: Edit },
+    { name: "Edit", icon: Edit },
+    { name: "Delete", icon: Trash },
   ];
 
   return (

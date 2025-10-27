@@ -4,8 +4,9 @@ import { Dropdown } from "@/components/Dropdown";
 import { Plus } from "@deemlol/next-icons";
 import { useResult } from "@/app/scoresheet/[name]/resultProvider";
 import SectionHeader from "./sectionHead";
+import { CompEnrollType } from "@/app/scoresheet/[name]/page";
 
-export default function TeamSection({ teams }: { teams: any }) {
+export default function TeamSection({ teams }: { teams: CompEnrollType[] }) {
   const { selectedTeam, selectTeam } = useResult();
 
   return (
@@ -38,9 +39,9 @@ export default function TeamSection({ teams }: { teams: any }) {
       >
         <div className="flex flex-col">
           <div className="flex flex-col max-h-40 p-1 overflow-y-auto">
-            {teams &&
-              teams.map((t: any) => {
-                const { id, name } = { id: t.teams.id, name: t.teams.name };
+            {teams.length > 0 &&
+              teams.map((t) => {
+                const { id, name } = t.teams;
                 const isSelected = name == selectedTeam;
                 return (
                   <p

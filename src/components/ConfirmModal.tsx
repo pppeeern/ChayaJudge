@@ -14,7 +14,7 @@ export default function ConfirmModal({
   onCancel,
 }: {
   title: string;
-  message?: any;
+  message?: string | React.ReactNode;
   confirmText: string;
   confirmStyle: "danger" | "primary";
   onConfirm?: () => void;
