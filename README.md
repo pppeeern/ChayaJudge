@@ -1,6 +1,8 @@
 
 # ChayaJudge
 
+🌐 https://chaya-judge.vercel.app/
+
 Chayajudge is a web-based judging and scoring platform designed for competitions.
 
 
@@ -9,6 +11,8 @@ Chayajudge is a web-based judging and scoring platform designed for competitions
 **Frontend:** Next.js, TailwindCSS, TypeScript
 
 **Database:** Supabase
+
+**Hosting:** Vercel
 
 
 ## Authors
